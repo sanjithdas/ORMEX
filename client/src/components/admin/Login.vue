@@ -1,12 +1,15 @@
 /** * @author [Sanjith] * @email [sanjith.das@gmail.com] * @create date
-2020-11-07 12:12:50 * @modify date 2020-11-07 12:12:50 * @desc [Login] */
+2020-11-07 12:07:20 * @modify date 2020-11-07 12:07:20 * @desc [Admin Login
+template] */
 <template>
   <div class="mtop">
     <b-form>
       <div class="row justify-content-center">
         <div class="col-md-6">
           <div class="card">
-            <div class="card-header text-left"><b>Login</b></div>
+            <div class="card-header text-left">
+              <b>Admin Login</b>
+            </div>
             <div class="card-body">
               <b-form-group
                 id="email-group"
@@ -19,20 +22,16 @@
                   type="email"
                   required
                   placeholder="Enter Email"
-                  v-model="$v.frmSeeker.email.$model"
+                  v-model="$v.frmAdmin.email.$model"
                   :state="
-                    $v.frmSeeker.email.$dirty
-                      ? !$v.frmSeeker.email.$error
-                      : null
+                    $v.frmAdmin.email.$dirty ? !$v.frmAdmin.email.$error : null
                   "
                   aria-describedby="email-feedback"
                 ></b-form-input>
 
                 <b-form-invalid-feedback id="email-feedback">
-                  <span v-if="!$v.frmSeeker.email.email">Invalid Email</span>
-                  <span v-if="!$v.frmSeeker.email.required"
-                    >Email required</span
-                  >
+                  <span v-if="!$v.frmAdmin.email.email">Invalid Email</span>
+                  <span v-if="!$v.frmAdmin.email.required">Email required</span>
                 </b-form-invalid-feedback>
               </b-form-group>
 
@@ -47,10 +46,10 @@
                   type="password"
                   required
                   placeholder="Enter password"
-                  v-model="$v.frmSeeker.password.$model"
+                  v-model="$v.frmAdmin.password.$model"
                   :state="
-                    $v.frmSeeker.password.$dirty
-                      ? !$v.frmSeeker.password.$error
+                    $v.frmAdmin.password.$dirty
+                      ? !$v.frmAdmin.password.$error
                       : null
                   "
                   aria-describedby="password-feedback"
@@ -79,15 +78,15 @@
   </div>
 </template>
 <script>
+// vuelidate module import for input validation
 import { validationMixin } from "vuelidate";
 import { required, minLength, email } from "vuelidate/lib/validators";
-import userAuthenticationService from "../services/UserAuthenticationService";
-
+import AdminService from "../../services/AdminService";
 export default {
   name: "Login",
   data() {
     return {
-      frmSeeker: {
+      frmAdmin: {
         email: null,
         password: null,
       },
@@ -98,7 +97,7 @@ export default {
   },
   mixins: [validationMixin],
   validations: {
-    frmSeeker: {
+    frmAdmin: {
       email: {
         required,
         minLength: minLength(3),
@@ -114,8 +113,8 @@ export default {
   methods: {
     async login() {
       // Validiaton Check
-      this.$v.frmSeeker.$touch();
-      if (this.$v.frmSeeker.$anyError) {
+      this.$v.frmAdmin.$touch();
+      if (this.$v.frmAdmin.$anyError) {
         this.errorFlag = true;
         console.log("error");
         return;
@@ -123,18 +122,15 @@ export default {
 
       // Posts data
       try {
-        const response = await userAuthenticationService.userLogin(
-          this.frmSeeker
-        );
+        const response = await AdminService.adminLogin(this.frmAdmin);
         console.log(response.data.token);
         this.errorFlag = false;
         this.$store.dispatch("setToken", response.data.token);
         this.$store.dispatch("setUser", response.data.user);
         this.$router.push({
-          name: "JobHome",
+          name: "Dashboard",
           params: { userdata: response.data },
         });
-        // next('')
       } catch (error) {
         this.errorFlag = true;
         console.log(error);

@@ -1,8 +1,15 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+/**
+ * @author [Sanjith]
+ * @email [sanjith.das@gmail.com]
+ * @create date 2020-11-07 12:20:50
+ * @modify date 2020-11-07 12:21:11
+ * @desc [Vuex Global Store]
+ */
+import Vue from "vue";
+import Vuex from "vuex";
 
 // This allows vue to access the store
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   strict: true, // This stops anything from accessing the state unless it is through "action" or "mutation"
@@ -10,32 +17,32 @@ export default new Vuex.Store({
     // These are basically the global states for the application thing we want to access everywhere
     token: null,
     user: null,
-    isUserLoggedIn: false
+    isUserLoggedIn: false,
   },
   // Mutation in vuex allow us to modify the state these mutations can be tracked using the Vue debug tools
   // Mutation can not be called directly you must call a action that calls a mutation
   mutations: {
     setToken(state, token) {
-      state.token = token
+      state.token = token;
       if (state.token) {
-        state.isUserLoggedIn = true
+        state.isUserLoggedIn = true;
       } else {
-        state.isUserLoggedIn = false
+        state.isUserLoggedIn = false;
       }
     },
     setUser(state, user) {
-      state.user = user
-    }
+      state.user = user;
+    },
   },
   // Actions are Vuex version of methods
   // If we want to modify anything in the state we must call a action that then calls a mutation. The mutation then modifies the state
   actions: {
     // Calls the setToken mutation and passes the token
     setToken({ commit }, token) {
-      commit('setToken', token)
+      commit("setToken", token);
     },
     setUser({ commit }, user) {
-      commit('setUser', user)
-    }
-  }
-})
+      commit("setUser", user);
+    },
+  },
+});

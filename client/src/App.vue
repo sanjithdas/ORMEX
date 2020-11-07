@@ -44,9 +44,7 @@
 <script>
 import '../src/assets/css/bootstrap.min.css'
 import '../src/assets/css/style.css'
-//import "../src/assets/js/jquery-3.3.1.min.js";
 import "../src/assets/js/bootstrap.min.js";
-
 
 
 export default {

@@ -2,25 +2,22 @@
  * @author [Sanjith]
  * @email [sanjith.das@gmail.com]
  * @create date 2020-09-23 15:56:25
- * @modify date 2020-10-07 17:32:04
- * @desc [description]
+ * @modify date 2020-11-07 12:26:33
+ * @desc [User Register (Job Seeker) controller ]
  */
 // Controller for User
 
-const {Op} = require('../models');
-const db =require('../models')
+const { Op } = require("../models");
+const db = require("../models");
 module.exports = {
-// create new job
-  async createUser (req,res) {
+  // create user
+  async createUser(req, res) {
     console.log(req.body);
-    db.User.create(
-      req.body
-    ).then( user => res.send(user))
-  }
-,// fetch all jobs - based on categories & companies
+    db.User.create(req.body).then((user) => res.send(user));
+  }, // fetch all jobs - based on categories & companies
   // async getJobs(req,res){
   //   db.Job.findAll({
-  //     include: [db.Category,db.Company], 
+  //     include: [db.Category,db.Company],
   //     left:true
   //     // include: [
   //     //   [db.Category,db.Company],
@@ -31,7 +28,7 @@ module.exports = {
 
   // async getJobsbyCat(req,res){
   //   db.Job.findAndCountAll({
-  //     include: [db.Category,db.Company], 
+  //     include: [db.Category,db.Company],
   //     left:true
   //     // include: [
   //     //   [db.Category,db.Company],
@@ -39,7 +36,7 @@ module.exports = {
   //     // ]
   //   }).then(todo => res.send(todo));
   // },
-  
+
   // async searchJob(req,res){
   //   let jobs = null;
   //    const search = req.params.search;
@@ -47,7 +44,7 @@ module.exports = {
   //     include: [db.Category,db.Company],
   //       where: {[Op.or]: [{ 'title': {[Op.like]: `%${search}%` } }, { 'description': {[Op.like]: `%${search}%` } }, { 'roles': {[Op.like]: `%${search}%` } }, { 'position': {[Op.like]: `%${search}%` } }]}
   //   }).then(todo => res.send(todo));
-   
+
   // },
 
   // async getJobCategoryCount(req,res){
@@ -55,14 +52,13 @@ module.exports = {
   //   jobsx= await db.Job.findAll({
   //       include:[{
   //          model: db.Category,
-  //          right:true, 
+  //          right:true,
   //         }],
   //        attributes: [[db.sequelize.fn('COUNT',
   //        ['Job.id']), 'JobCount']],
   //        group: ['Category.id']
-         
+
   //     }).then(todo => res.send(todo));
   //     //console.log(JSON.stringify(jobsx));
   //   }
-  
-}
+};

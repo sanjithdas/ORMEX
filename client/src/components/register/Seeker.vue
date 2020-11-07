@@ -1,5 +1,5 @@
  <template>
-  <div class="mt-5">
+  <div class="mtop">
     <b-form>
     <div class="row justify-content-center">
       <div class="col-md-6">
@@ -34,22 +34,6 @@
                     </span>
                 </b-form-invalid-feedback>
              </b-form-group>  
-
-             <!-- <b-form-group id="gender-group" label="Gender:"   label-for="Gender" description=" ">
-                <div class="col-md-12 radio-align"  >
-
-                  <div  class="radio-align col-md-4">
-                  Male<b-form-radio id="male"  name="gender"  v-model="$v.frmSeeker.gender "    ></b-form-radio>
-                  </div>
-
-                  <div class="radio-align">
-                  Female<b-form-radio id="female"  name="gender"  v-model="$v.frmSeeker.gender "   ></b-form-radio>
-                  </div>
-
-                </div>
-                
-              </b-form-group> -->
-
                <b-form-group id="password-group" label="Password:"   label-for="password" description=" ">
                 <b-form-input id="password" type="password" required placeholder="Enter password" v-model="$v.frmSeeker.password.$model" :state="$v.frmSeeker.password.$dirty ? !$v.frmSeeker.password.$error : null" aria-describedby="password-feedback"></b-form-input>
                 <b-form-invalid-feedback id="password-feedback">

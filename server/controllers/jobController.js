@@ -2,8 +2,8 @@
  * @author [Sanjith]
  * @email [sanjith.das@gmail.com]
  * @create date 2020-09-23 15:56:25
- * @modify date 2020-10-07 22:55:29
- * @desc [description]
+ * @modify date 2020-11-07 12:23:40
+ * @desc [Job Controller]
  */
 // Controller for Job Request
 
@@ -16,7 +16,7 @@ module.exports = {
     
     console.log(req.body);
     try{
-     db.Job.create(
+    await db.Job.create(
       req.body
      ).then( submittedTodo => res.send(submittedTodo))
     }catch(error){
@@ -25,7 +25,7 @@ module.exports = {
   }
 ,// fetch all jobs - based on categories & companies
   async getJobs(req,res){
-    db.Job.findAll({
+    await db.Job.findAll({
       include: [db.Category,db.Company], 
       left:true
       // include: [
@@ -37,12 +37,24 @@ module.exports = {
 
   async deleteJob(req,res){
    
-    db.Job.destroy({
+    await db.Job.destroy({
       where : {id : req.params.id }
     }).then(job => res.status(200).json({code:200, message:'Deleted successfully'}));
    
     // res.status(200).json({code: 200, message: 'Post deleted', deletedPost: post})
       
+  },
+  async editJob(req,res){
+    console.log('in edirt');
+    console.log(req.params.id);
+    console.log(req.body);
+   try{
+    const job = db.Job.update(req.body,{
+      where : {id : req.params.id }
+    }).then(job => res.status(200).send(job));
+  }catch(error){
+    res.status(500).send(error);
+  }  
   }
 ,
   async getJobsbyCat(req,res){

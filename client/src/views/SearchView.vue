@@ -150,12 +150,7 @@ data() {
   }
 },
   mounted() {
-    //this.slug = this.$route.params.slug;
-   // this.jobs = this.$route.params.item;
     
-    // for (let x in this.jobs){
-    //   console.log(x);
-    // }
     window.scrollTo(0,0);
   },
   methods: {

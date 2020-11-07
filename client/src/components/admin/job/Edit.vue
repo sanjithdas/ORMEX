@@ -1,6 +1,5 @@
 /** * @author [Sanjith] * @email [sanjith.das@gmail.com] * @create date
-2020-11-07 11:57:58 * @modify date 2020-11-07 11:57:58 * @desc [Create Job ,
-validate the data using vuelidate package] */
+2020-11-07 12:01:34 * @modify date 2020-11-07 12:01:34 * @desc [Edit Job] */
 <template>
   <div class="container mtop">
     <div class="row">
@@ -9,7 +8,7 @@ validate the data using vuelidate package] */
       </div>
       <div class="col-md-9">
         <div class="card">
-          <div class="card-header">Create Job</div>
+          <div class="card-header"><b>Edit Job</b></div>
           <div class="card-body">
             <b-form-group
               id="title-group"
@@ -91,6 +90,7 @@ validate the data using vuelidate package] */
                 aria-describedby="title-feedback"
               >
               </b-form-select>
+
               <b-form-invalid-feedback id="category-feedback">
               </b-form-invalid-feedback>
             </b-form-group>
@@ -106,9 +106,9 @@ validate the data using vuelidate package] */
                 v-model="frmJob.CompanyId"
                 :options="this.company"
                 aria-describedby="title-feedback"
-                @change="getComapnyUserID(frmJob.CompanyId)"
               >
               </b-form-select>
+
               <b-form-invalid-feedback id="category-feedback">
               </b-form-invalid-feedback>
             </b-form-group>
@@ -293,13 +293,13 @@ validate the data using vuelidate package] */
                 </span>
               </b-form-invalid-feedback>
             </b-form-group>
-            <input type="hidden" name="UserId" :value="this.frmJob.UserId" />
+
             <div class="col-4 mt-3">
               <b-button
-                @click="create"
+                @click="update"
                 class="text-center w-100"
                 variant="success"
-                >Create</b-button
+                >Update</b-button
               >
             </div>
           </div>
@@ -309,26 +309,32 @@ validate the data using vuelidate package] */
   </div>
 </template>
 <script>
+// import vuelidate for validating user input
 import { validationMixin } from "vuelidate";
 import { required, minLength } from "vuelidate/lib/validators";
 
+// custom component insert
 import Menubar from "../../admin/Menubar";
 import CategoryListingService from "@/services/CategoryListingService";
 import CompanyListingService from "@/services/CompanyListingService";
-import AdminService from "@/services/AdminService";
+import EditJobService from "@/services/EditJobService";
+
 export default {
   components: { Menubar },
+  props: ["job"],
   data() {
     return {
       frmJob: {
         title: null,
         description: null,
         roles: null,
+
         position: null,
         address: null,
         number_of_vacancy: null,
         experience: null,
-        UserId: null,
+        UserId: 42,
+
         last_date: null,
         salary: null,
         type: null,
@@ -379,23 +385,20 @@ export default {
 
       description: {
         required,
-        minLength: minLength(3),
+        minLength: minLength(10),
       },
       roles: {
         required,
-        minLength: minLength(3),
+        minLength: minLength(10),
       },
-      //  category: {
-      //    required,
-      //    minLength: minLength(10)
-      //  },
+
       position: {
         required,
-        minLength: minLength(3),
+        minLength: minLength(10),
       },
       address: {
         required,
-        minLength: minLength(3),
+        minLength: minLength(10),
       },
       number_of_vacancy: {
         required,
@@ -403,18 +406,6 @@ export default {
       experience: {
         required,
       },
-      //  salary: {
-      //    required,
-
-      //  },
-      //  type: {
-      //    required,
-
-      //  },
-      //  status: {
-      //    required,
-
-      //  },
       last_date: {
         required,
       },
@@ -422,7 +413,7 @@ export default {
   },
 
   methods: {
-    async create() {
+    async update() {
       // Validiaton Check
       this.$v.frmJob.$touch();
       if (this.$v.frmJob.$anyError) {
@@ -433,17 +424,16 @@ export default {
 
       // Posts data
       try {
-        await AdminService.createJob(this.frmJob);
+        await EditJobService.editJob(this.frmJob, this.frmJob.id);
         this.$router.push({ name: "Jobs" });
       } catch (error) {
         this.errorFlag = true;
         console.log(error);
         this.error = error.response.data.error;
-        console.log(this.error);
       }
     },
     /**
-     * FETCH ALL CATEGORIES
+     * fetching all categories from the db.
      */
     async getAllCategories() {
       try {
@@ -466,38 +456,29 @@ export default {
       }
     },
     /**
-     * FECTH ALL COMPANIES
+     * fetching all the companies from the db
      */
     async getAllCompanies() {
-      try {
-        this.companies = (await CompanyListingService.getAllCompanies()).data;
-        this.companies.forEach((value) => {
-          this.company.push(
-            Object.assign(
-              {},
-              {
-                value: value.id,
-                text: value.cname,
-              }
-            )
-          );
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    /**
-     * get selected comapanies user id
-     * if the user is administrator only
-     */
-    async getComapnyUserID(companyId) {
-      const user = await AdminService.getComapnyUserID(companyId);
-      this.frmJob.UserId = user.data[0].user_id;
+      this.companies = (await CompanyListingService.getAllCompanies()).data;
+
+      this.companies.forEach((value) => {
+        this.company.push(
+          Object.assign(
+            {},
+            {
+              value: value.id,
+              text: value.cname,
+            }
+          )
+        );
+      });
     },
   },
   mounted() {
     this.getAllCategories();
     this.getAllCompanies();
+    this.frmJob = this.job;
+    console.log(this.frmJob.id);
   },
   computed: {
     toSlug: function() {
