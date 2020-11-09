@@ -9,7 +9,7 @@ validate the data using vuelidate package] */
       </div>
       <div class="col-md-9">
         <div class="card">
-          <div class="card-header">Create Job</div>
+          <div class="card-header"><b>Create Job</b></div>
           <div class="card-body">
             <b-form-group
               id="title-group"

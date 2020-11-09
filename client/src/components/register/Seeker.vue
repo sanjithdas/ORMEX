@@ -4,7 +4,7 @@
     <div class="row justify-content-center">
       <div class="col-md-6">
         <div class="card">
-          <div class="card-header text-left">Job Seeker Register</div>
+          <div class="card-header text-left"><b>Job Seeker Register</b></div>
             <div class="card-body">
 
               <b-form-group id="username-group" label="Name:" label-for="username" description="">

@@ -6,7 +6,7 @@
       </div>
       <div class="col-md-9">
         <div class="card">
-          <div class="card-header">Testimonials</div>
+          <div class="card-header"><b>Testimonials</b></div>
           <div class="card-body">
             <router-view></router-view>
           </div>

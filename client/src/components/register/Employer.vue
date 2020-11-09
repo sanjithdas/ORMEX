@@ -4,7 +4,7 @@
     <div class="row justify-content-center">
       <div class="col-md-6">
         <div class="card">
-          <div class="card-header text-left">Employer Register</div>
+          <div class="card-header text-left"><b>Employer Register</b></div>
             <div class="card-body">
               <b-form-group id="username-group" label="Name:" label-for="username" description="">
                 <b-form-input id="cname" type="text" required placeholder="Name" v-model="$v.frmSeeker.username.$model" :state="$v.frmSeeker.username.$dirty ? !$v.frmSeeker.username.$error : null"

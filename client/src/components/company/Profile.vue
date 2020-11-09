@@ -1,7 +1,7 @@
 <template>
   <div class="ctop">
     <div class="container">
-    <div class="card card-header">Company Profile</div>
+    <div class="card card-header"><b>Company Profile</b></div>
     <div class="mt-2 row justify-content-center">
       <div class="card-body text-danger"><h3>Under Construction</h3></div>
        

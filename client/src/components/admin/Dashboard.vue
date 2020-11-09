@@ -10,7 +10,7 @@ Admin] */
       </div>
       <div class="col-md-9">
         <div class="card">
-          <div class="card-header">Dashboard</div>
+          <div class="card-header"><b>Dashboard</b></div>
           <div class="card-body">
             <div class="text-primary"></div>
           </div>

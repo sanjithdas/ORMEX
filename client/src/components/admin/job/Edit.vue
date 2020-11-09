@@ -333,7 +333,6 @@ export default {
         address: null,
         number_of_vacancy: null,
         experience: null,
-        UserId: 42,
 
         last_date: null,
         salary: null,

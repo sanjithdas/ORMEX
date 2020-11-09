@@ -6,7 +6,7 @@
       </div>
       <div class="col-md-9">
         <div class="card">
-          <div class="card-header">Create Category</div>
+          <div class="card-header"><b>Create Category</b></div>
           <div class="card-body">
             <div class="text-primary"></div>
           </div>

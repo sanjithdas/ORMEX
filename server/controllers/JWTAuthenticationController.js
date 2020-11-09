@@ -2,7 +2,7 @@
  * @author [Sanjith]
  * @email [sanjith.das@gmail.com]
  * @create date 2020-11-07 12:24:29
- * @modify date 2020-11-07 12:25:26
+ * @modify date 2020-11-09 10:15:30
  * @desc [JWT Authentication Component]
  */
 //Imports
@@ -78,7 +78,7 @@ module.exports = {
     }
   },
   async createCompany(req, res) {
-    console.log(req.body);
+    // console.log(req.body);
   },
   async login(req, res) {
     try {
@@ -99,8 +99,7 @@ module.exports = {
 
       //If the password does not match
       const isPasswordValid = await user.comparePassword(password); //compares the password with the hashed password in the database
-      console.log("Password");
-      console.log(isPasswordValid);
+
       if (!isPasswordValid) {
         //
         return res.status(401).send({
@@ -142,8 +141,7 @@ module.exports = {
 
       //If the password does not match
       const isPasswordValid = await user.comparePassword(password); //compares the password with the hashed password in the database
-      console.log("Password ddd");
-      console.log(isPasswordValid);
+
       if (!isPasswordValid) {
         //
         return res.status(401).send({

@@ -2,7 +2,7 @@
  * @author [Sanjith]
  * @email [sanjith.das@gmail.com]
  * @create date 2020-11-07 13:29:05
- * @modify date 2020-11-07 13:29:50
+ * @modify date 2020-11-09 10:21:29
  * @desc [Server set up]
  */
 const express = require("express");
@@ -15,6 +15,8 @@ const config = require("./config/config");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
+
+
 const apiRoutes = require("./routes/apiRoutes");
 app.use("/api", apiRoutes);
 

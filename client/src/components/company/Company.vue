@@ -1,7 +1,7 @@
 <template>
   <div class="ctop">
     <div class="container">
-        <div class="card-header text-left">Companies Registerd with Us</div>
+        <div class="card-header text-left"><b>Companies Registerd with Us</b></div>
         <div class="mt-2 row justify-content-center">
           
           <div class="col-md-3 col-sm-12 " v-for="company in companies" :key="company.id">

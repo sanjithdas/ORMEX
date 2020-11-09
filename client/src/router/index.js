@@ -2,7 +2,7 @@
  * @author [Sanjith]
  * @email [sanjith.das@gmail.com]
  * @create date 2020-10-08 21:15:47
- * @modify date 2020-11-07 12:13:49
+ * @modify date 2020-11-08 11:40:23
  * @desc [vue routes are defined ]
  */
 import Vue from "vue";
@@ -12,13 +12,13 @@ import About from "../views/About.vue";
 import Seeker from "../components/register/Seeker.vue";
 import Employer from "../components/register/Employer.vue";
 import Company from "../components/company/Company.vue";
-import CreateCompany from "../components/company/Create.vue";
+import CreateCompany from "../components/admin/company/Create.vue";
 import CompanyProfile from "../components/company/Profile.vue";
 import Login from "../components/Login.vue";
 import Contact from "../views/Contact.vue";
 import SearchView from "../views/SearchView.vue";
 import Myjob from "../views/job/Myjob.vue";
-import Dashboard from "../components/admin/Dashboard.vue";
+//import Dashboard from "../components/admin/Dashboard.vue";
 import CreateCategory from "../components/category/Create.vue";
 import Testimonial from "../components/admin/Testimonial.vue";
 import Jobs from "../components/admin/Jobs.vue";
@@ -98,7 +98,7 @@ const routes = [
     path: "/admin/dashboard",
     name: "Dashboard",
     props: true,
-    component: Dashboard,
+    component: Jobs,
   },
 
   {
