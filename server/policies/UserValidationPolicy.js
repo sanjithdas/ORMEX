@@ -2,7 +2,7 @@
  * @author [Sanjith]
  * @email [sanjith.das@gmail.com]
  * @create date 2020-11-07 13:25:44
- * @modify date 2020-11-07 13:27:04
+ * @modify date 2020-11-12 00:33:51
  * @desc [Joi Validation]
  */
 const Joi = require("joi"); // Joi is used to validate user input
@@ -21,9 +21,9 @@ module.exports = {
       user_type: Joi.string().default("seeker"),
       email: Joi.string().email().required(),
       dob: Joi.date().required(),
-      password: Joi.string().regex(
-        new RegExp("^[A-Za-z ][A-Za-z0-9!@#$%^&* ]*$")
-      ),
+      password: Joi.string()
+        .min(10)
+        .regex(new RegExp("^[A-Za-z ][A-Za-z0-9!@#$%^&* ]*$")),
       cpassword: Joi.string().valid(Joi.ref("password")).required().strict(),
     });
     //Using Joi schema to validate user data

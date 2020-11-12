@@ -2,7 +2,7 @@
  * @author [Sanjith]
  * @email [sanjith.das@gmail.com]
  * @create date 2020-09-23 15:53:13
- * @modify date 2020-11-09 13:23:17
+ * @modify date 2020-11-12 10:03:24
  * @desc [Routes definition]
  */
 /**
@@ -14,31 +14,31 @@ const app = express();
 const db = require("../models");
 const multer = require("multer");
 
-const fileFilter = (request , file , cb) =>{
-    const allowedTypes = ['image/jpeg','image/jpg','image/png'];
-    if (!allowedTypes.includes(file.mimetype)){
-        const error = new Error("Incorrect file format");
-        error.code = "INCORRECT_FILETYPE";
-        return cb(error, false);
-    }
-    
-    cd(null,true);
-}
+const fileFilter = (request, file, cb) => {
+  const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
+  if (!allowedTypes.includes(file.mimetype)) {
+    const error = new Error("Incorrect file format");
+    error.code = "INCORRECT_FILETYPE";
+    return cb(error, false);
+  }
+
+  cd(null, true);
+};
 
 const upload = multer({
   dest: "./uploads",
   fileFilter,
-  limits:{
-      fileSize: 5000000
-  }
+  limits: {
+    fileSize: 5000000,
+  },
 });
 
-app.use((err, req, res , next) =>{
-    if (err.code === "INCORRECT_FILETYPE"){
-        res.status(422).json({ error : 'Only images are allowed '})
-        return;
-    }
-})
+app.use((err, req, res, next) => {
+  if (err.code === "INCORRECT_FILETYPE") {
+    res.status(422).json({ error: "Only images are allowed " });
+    return;
+  }
+});
 
 const categoryController = require("../controllers/categoryController");
 
@@ -97,5 +97,9 @@ router.post(
   userValidationPolicy.register,
   jwtAuthenticationController.register
 );
+
+// get a user info
+
+router.get("/user/:myid", jwtAuthenticationController.getMyInfo);
 
 module.exports = router;

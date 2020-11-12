@@ -2,7 +2,7 @@
  * @author [Sanjith]
  * @email [sanjith.das@gmail.com]
  * @create date 2020-11-07 12:24:29
- * @modify date 2020-11-09 10:15:30
+ * @modify date 2020-11-12 10:07:32
  * @desc [JWT Authentication Component]
  */
 //Imports
@@ -25,6 +25,7 @@ module.exports = {
   //Routes
   //Register a new user
   async register(req, res) {
+    // console.log(req.headers);
     try {
       const user = await User.create({
         username: req.body.username,
@@ -38,8 +39,10 @@ module.exports = {
 
       const userJSON = user.toJSON(); // Converts the user to JSON
       res.send({
+        message: "User created successfully",
         user: userJSON,
-        token: jwtSignUser(userJSON), // Passes the user data to jwtSignUser to be stored into the token
+        token: jwtSignUser(userJSON),
+        // Passes the user data to jwtSignUser to be stored into the token
       });
 
       // email notification
@@ -47,7 +50,7 @@ module.exports = {
       cfg.smtp = {
         host: "smtp.gmail.com",
         user: "sanjith.das@gmail.com",
-        pass: "Devnadrishya2012@",
+        pass: "",
         port: "587",
       };
 
@@ -159,6 +162,32 @@ module.exports = {
       console.log(err);
       res.status(500).send({
         error: "A errors has occurred well trying to login",
+      });
+    }
+  },
+
+  async getMyInfo(req, res) {
+    const id = req.params.myid;
+    try {
+      const user = await User.findOne({
+        where: {
+          id: id,
+        },
+      });
+      if (!user) {
+        res.send({
+          message: "No user exist",
+        });
+      } else {
+        const userJSON = user.toJSON();
+        res.send({
+          user: userJSON,
+          token: jwtSignUser(userJSON), // Passes the user data to jwtSignUser to be stored into the token
+        });
+      }
+    } catch (error) {
+      res.status(500).send({
+        error: error,
       });
     }
   },

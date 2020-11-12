@@ -2,8 +2,8 @@
  * @author [Sanjith]
  * @email [sanjith.das@gmail.com]
  * @create date 2020-09-23 15:56:25
- * @modify date 2020-11-07 12:26:33
- * @desc [User Register (Job Seeker) controller ]
+ * @modify date 2020-11-11 20:54:45
+ * @desc [User Register (Job Seeker) controller - NOT IN USE]
  */
 // Controller for User
 
@@ -14,7 +14,9 @@ module.exports = {
   async createUser(req, res) {
     console.log(req.body);
     db.User.create(req.body).then((user) => res.send(user));
-  }, // fetch all jobs - based on categories & companies
+  },
+
+  // fetch all jobs - based on categories & companies
   // async getJobs(req,res){
   //   db.Job.findAll({
   //     include: [db.Category,db.Company],

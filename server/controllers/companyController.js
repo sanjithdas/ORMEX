@@ -2,13 +2,17 @@
  * @author [Sanjith]
  * @email [sanjith.das@gmail.com]
  * @create date 2020-09-23 15:59:21
- * @modify date 2020-11-09 10:59:15
+ * @modify date 2020-11-12 10:02:20
  * @desc [Company Controller]
  * https://blog.bitsrc.io/uploading-files-and-images-with-vue-and-express-2018ca0eecd0
  */
 // Controller - cateogry request
 const db = require("../models");
 const company = require("../models/company");
+
+
+
+// token: jwtSignUser(userJSON), 
 
 module.exports = {
   // create category

@@ -125,7 +125,7 @@ Page] */
                   class="company-logo blank-logo text-center text-md-left pl-3"
                 >
                   <img
-                    src="http://www.nadhammelbourne.com.au/jobs/uploads/logo/1566622779.jpeg"
+                    src="../assets/images/jobs.jpg"
                     alt="Image"
                     class="img-fluid mx-auto"
                   />

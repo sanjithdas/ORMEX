@@ -2,7 +2,7 @@
  * @author [Sanjith]
  * @email [sanjith.das@gmail.com]
  * @create date 2020-09-23 15:56:25
- * @modify date 2020-11-08 21:39:31
+ * @modify date 2020-11-12 11:54:28
  * @desc [Job Controller]
  */
 // Controller for Job Request
@@ -15,8 +15,8 @@ module.exports = {
   async createJob(req, res) {
     console.log(req.body);
     try {
-      await db.Job.create(req.body).then((submittedTodo) =>
-        res.send(submittedTodo)
+      await db.Job.create(req.body).then((myjob) =>
+        res.send({ myjob: myjob, message: "Jb created successfully" })
       );
     } catch (error) {
       console.log(error);

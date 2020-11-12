@@ -2,7 +2,7 @@
  * @author [Sanjith]
  * @email [sanjith.das@gmail.com]
  * @create date 2020-09-23 15:59:21
- * @modify date 2020-11-07 12:23:15
+ * @modify date 2020-11-12 10:01:12
  * @desc [Category Controller]
  */
 // Controller - cateogry request
@@ -12,15 +12,13 @@ module.exports = {
   // create category
   async createCategory(req, res) {
     console.log(req.body);
-    db.Category.create(req.body).then((submittedTodo) =>
-      res.send(submittedTodo)
-    );
+    db.Category.create(req.body).then((category) => res.send(category));
   },
   // fetch all categories - retrieve jobs, if they have one.
   async getCategories(req, res) {
     db.Category.findAll({
       include: [db.Job],
-    }).then((todo) => res.send(todo));
+    }).then((categories) => res.send(categories));
   },
   // async getJobCategoryCount(req,res){
   // db.Job.findAll({
